@@ -1,0 +1,402 @@
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background: url('shimmering-opal-star-in-a-velvet-sky-1241681050019561522.jpeg') no-repeat center center fixed;
+    background-size: cover;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+/* Navigation */
+nav {
+    width: 100%;
+    padding: 20px 40px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 10;
+    background: transparent; /* Agar menyatu dengan background */
+}
+
+nav .logo {
+    color: white;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    margin: 0;
+}
+
+nav ul li {
+    margin-left: 20px;
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+    padding: 10px;
+    transition: color 0.3s;
+}
+
+nav ul li a:hover {
+    color: #007BFF;
+}
+
+/* Login Form */
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    margin-top: 80px; /* to adjust for nav */
+}
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px); /* Muncul dari atas */
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeOut {
+    from {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    to {
+        opacity: 0;
+        transform: translateY(-20px); /* Menghilang ke atas */
+    }
+}
+
+.login-box {
+    opacity: 0;
+    visibility: hidden; /* Gunakan visibility untuk menyembunyikan elemen */
+    transform: translateY(-20px); /* Muncul dari atas */
+    transition: opacity 0.5s ease, transform 0.5s ease, visibility 0s 0.5s;
+    background: rgba(255, 255, 255, 0.1); /* Transparan */
+    backdrop-filter: blur(10px); /* Efek buram kaca (frosted glass effect) */
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    width: 350px;
+    text-align: center;
+}
+
+.login-box.show {
+    visibility: visible; /* Tampilkan elemen */
+    opacity: 1;
+    transform: translateY(0); /* Turun ke tempat */
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+/* Class untuk menyembunyikan login box */
+.login-box.hide {
+    opacity: 0;
+    transform: translateY(-20px); /* Naik ke atas */
+    visibility: hidden; /* Sembunyikan elemen */
+    transition: opacity 0.5s ease, transform 0.5s ease, visibility 0s 0.5s;
+}
+
+h2 {
+    font-family: "Josefin Sans", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 800;
+    font-style: normal;
+    color: white;
+    margin-bottom: 20px;
+}
+
+.input-group {
+    margin-bottom: 15px;
+    text-align: left;
+}
+
+.input-group label {
+    color: white;
+    margin-bottom: 5px;
+    display: block;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 5px;
+    background-color: rgba(255, 255, 255, 0.1);
+    color: white;
+}
+
+.remember-me {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    color: white;
+}
+
+.remember-me input {
+    margin-right: 10px;
+}
+
+.forgot-password {
+    text-align: right;
+    margin-bottom: 15px;
+}
+
+.forgot-password a {
+    color: #007BFF;
+    text-decoration: none;
+}
+
+.forgot-password a:hover {
+    text-decoration: underline;
+}
+
+/* Gaya untuk tombol Close (X) */
+.close-btn {
+    position: absolute;
+    top: 10px; /* Posisi di dalam kotak */
+    right: 10px; /* Posisi di dalam kotak */
+    width: 35px;
+    height: 35px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #1a2933; /* Warna background sesuai dengan gambar */
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+    border-radius: 0 10px 0 10px; /* Bentuk sudut sesuai gambar */
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Efek shadow */
+    transition: background-color 0.3s;
+}
+
+.close-btn:hover {
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
+/* Gaya untuk pesan error */
+.error-message {
+    color: red;
+    font-size: 12px;
+    margin-bottom: 5px;
+    opacity: 0; /* Sembunyikan default */
+    transition: opacity 0.3s ease, margin-bottom 0.3s ease; /* Transisi smooth untuk muncul */
+    height: 0; /* Tinggi default 0 agar tidak mengambil ruang */
+    overflow: hidden;
+}
+
+/* Input group */
+.input-group {
+    position: relative;
+    margin-bottom: 20px; /* Default jarak antar grup */
+}
+
+/* Ketika ada error, berikan jarak ekstra */
+.input-group.error-active .error-message {
+    opacity: 1; /* Tampilkan pesan error */
+    height: auto; /* Izinkan tinggi dinamis */
+    margin-bottom: 10px; /* Jarak antara error dan label */
+}
+
+.input-group.error-active {
+    margin-bottom: 40px; /* Tambahkan jarak antara grup input */
+}
+
+/* Style umum lainnya */
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+
+.login-btn {
+    width: 100%;
+    padding: 10px;
+    background-color: #007BFF;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background 0.3s;
+}
+
+.login-btn:hover {
+    background-color: #0056b3;
+}
+
+.register {
+    font-family: '"Josefin Sans", sans-serif';
+    font-weight: 500;
+    margin-top: 15px;
+    color: white;
+}
+
+.register a {
+    font-family: "Josefin Sans", sans-serif;
+    color: #007BFF;
+    text-decoration: none;
+}
+
+.register a:hover {
+    text-decoration: underline;
+}
+
+/* Tambahkan ini untuk tombol "Login" di navigasi */
+nav ul li a.login-btn-nav {
+    background-color: transparent;
+    padding: 8px 20px;
+    border-radius: 10px; /* Membuat sudut lengkung */
+    color: white;
+    text-decoration: none;
+    transition: background-color 0.3s;
+}
+
+nav ul li a.login-btn-nav:hover {
+    background-color: rgba(0, 123, 255, 1); /* Efek hover */
+}
+
+
+
+
+
+/* Style Dashboard */
+/* Style Dashboard */
+body {
+    background-color: #f4f6f9;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.navbar-loggedin {
+    width: 100%;
+    padding: 15px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-loggedin .logo {
+    color: white;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.navbar-loggedin ul {
+    list-style: none;
+    display: flex;
+    margin: 0;
+}
+
+.navbar-loggedin ul li {
+    margin-left: 20px;
+}
+
+.navbar-loggedin ul li a {
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 16px;
+    padding: 10px;
+    transition: color 0.3s;
+}
+
+.dashboard-container {
+    padding: 40px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.dashboard-header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.dashboard-header h1 {
+    font-size: 36px;
+    color: #ffffff;
+}
+
+.dashboard-header p {
+    font-size: 18px;
+    color: #555;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.grid-item {
+    background-color: rgba(255, 255, 255, 0.5); /* Warna putih dengan 50% transparansi */
+    backdrop-filter: blur(10px); /* Efek buram pada latar belakang */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+
+.grid-item h3 {
+    font-size: 22px;
+    margin-bottom: 15px;
+    color: #333;
+}
+
+.grid-item p {
+    font-size: 16px;
+    margin-bottom: 20px;
+    color: #666;
+}
+
+.action-btn {
+    padding: 10px 20px;
+    border: none;
+    background-color: #007BFF;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.action-btn:hover {
+    background-color: #0056b3;
+}
+
+nav ul li a.logout-btn {
+    background-color: transparent;
+    padding: 8px 20px;
+    border-radius: 10px; /* Membuat sudut lengkung */
+    color: white;
+    text-decoration: none;
+    transition: background-color 0.3s;
+}
+
+nav ul li a.logout-btn:hover {
+    background-color: rgba(0, 123, 255, 1); /* Efek hover */
+}
